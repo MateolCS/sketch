@@ -15,7 +15,7 @@ function createBoard(mainDiv){
 
     let smallDiv  = document.querySelectorAll('.inside')
     smallDiv.forEach(div => {
-        div.addEventListener('click', () =>{
+        div.addEventListener('mouseenter', () =>{
             div.style.backgroundColor = '#023e8a'
         })
     });
