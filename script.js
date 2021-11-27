@@ -1,10 +1,7 @@
 let body = document.querySelector('body') 
 
 let mainDiv = document.querySelector('#main-div') //game field
-mainDiv.style.display = 'grid'
-mainDiv.style.gridTemplateColumns = 'repeat(16, 1fr)'
-mainDiv.style.border = '4px solid #000'
-mainDiv.style.marginTop = '10rem'
+
 
 let refreshButton = document.createElement('button') //refresh button
 refreshButton.innerText = 'Reset'
@@ -13,27 +10,40 @@ refreshButton.style.color = '#fff'
 refreshButton.style.border = '0'
 refreshButton.style.padding = '0.5em'
 refreshButton.style.borderRadius = '15%'
+refreshButton.style.marginTop = '2rem'
 
-body.appendChild(refreshButton)
+body.insertBefore(refreshButton, mainDiv)
 
 refreshButton.addEventListener('click', () =>{
-    window.location.reload(true)
+
+    mainDiv.innerHTML = ''
+    
+    let boardSize = document.querySelector('.field-size').value 
+    mainDiv.style.display = 'grid'
+    mainDiv.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`
+    mainDiv.style.border = '4px solid #000'
+    mainDiv.style.marginTop = '3rem'
+
+    createBoard(mainDiv, boardSize)
+
 })
 
 let fieldSize = document.createElement('input') //input for field size
 fieldSize.type = 'text'
 fieldSize.className = 'field-size'
-fieldSize.pattern = '[1-99]{1}'
+fieldSize.pattern = '[1-100]{1}'
 
-body.appendChild(fieldSize)
+body.insertBefore(fieldSize, mainDiv)
 
-let boardSize = document.querySelector('.field-size')
+
 
 
 //creating board 
 
-function createBoard(mainDiv){
-    for(let i = 0; i < 256; i++){
+function createBoard(mainDiv, boardSize){
+
+    let size = boardSize * boardSize
+    for(let i = 0; i < size; i++){
         let div = document.createElement('div')
         div.classList.add('inside')
         div.style.padding = '10px'
@@ -48,7 +58,5 @@ function createBoard(mainDiv){
         })
     });
 }
-
-createBoard(mainDiv)
 
 
